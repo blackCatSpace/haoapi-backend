@@ -1,0 +1,10 @@
+# 公共配置文件
+
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+haoapi:
+  client:
+    access-key: hao
+    secret-key: abcdefgh

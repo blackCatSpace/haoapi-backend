@@ -1,0 +1,50 @@
+# 公共配置文件
+
+server:
+  port: 8060
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=source, hao
+      routes:
+        - id: api_route
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/**
+#        - id: add_request_header_route
+#          uri: http://localhost:8123
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - AddRequestHeader=hao, swag
+#            - AddRequestParameter=name, dog
+#            - name: CircuitBreaker
+#              args:
+#                name: myCircuitBreaker
+#                fallbackUri: forward:/fallback
+#        - id: hao-fallback
+#          uri: https://hao.icu
+#          predicates:
+#            - Path=/fallback
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+
+# 原创_项目 [鱼皮](https://space.bilibili.com/12890453/)
+
+dubbo:
+  application:
+    name: dubbo-springboot-demo-consumer
+    qosEnable: false
+#    qosPort: 33333
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://localhost:8848
+
