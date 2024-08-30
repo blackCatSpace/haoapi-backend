@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 帖子接口
+ * 接口信息
  *
  * @author hao
  */
@@ -243,6 +243,7 @@ public class InterfaceInfoController {
         HaoApiClient tempHaoApiClient = new HaoApiClient(accessKey, secretKey);
         com.hao.haoapiclientsdk.model.User user = new com.hao.haoapiclientsdk.model.User();
         user.setUsername(interfaceInfoInvokeRequest.getUserRequestParams());
+        // todo 签名后传入，不应该在sdk中签名
         String usernameByPost = tempHaoApiClient.getUsernameByPost(user);
         return ResultUtils.success(usernameByPost);
 

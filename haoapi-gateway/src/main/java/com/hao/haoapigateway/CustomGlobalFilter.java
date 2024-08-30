@@ -52,6 +52,9 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
     private static final String INTERFACE_HOST = "http://localhost:8090";
 
+    public CustomGlobalFilter() {
+    }
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 1. 请求日志
@@ -103,6 +106,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return handleNoAuth(response);
         }
         // 实际情况中是从数据库中查出 secretKey
+        // todo 签名算法应该不应该是写在sdk中的
         String secretKey = invokeUser.getSecretKey();
         String serverSign = SignUtils.genSign(body, secretKey);
         if (sign == null || !sign.equals(serverSign)) {
